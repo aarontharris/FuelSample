@@ -1,0 +1,4 @@
+[submodule "Fuel"]
+	path = Fuel
+	url = git@github.com:aarontharris/Fuel.git
+	branch = master
