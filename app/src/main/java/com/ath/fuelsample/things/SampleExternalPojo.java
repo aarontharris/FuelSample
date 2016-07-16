@@ -1,9 +1,10 @@
-package com.ath.fuelsample;
+package com.ath.fuelsample.things;
 
 import android.app.Activity;
 import android.app.Application;
 
 import com.ath.fuel.Lazy;
+import com.ath.fuelsample.Log;
 
 // Pretend as though this class is external blackbox code.
 // This serves as an example on how you can bind it to Fuel

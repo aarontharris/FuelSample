@@ -1,4 +1,4 @@
-package com.ath.fuelsample;
+package com.ath.fuelsample.things;
 
 public interface Box {
 

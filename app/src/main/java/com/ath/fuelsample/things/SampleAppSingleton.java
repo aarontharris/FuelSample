@@ -1,4 +1,4 @@
-package com.ath.fuelsample;
+package com.ath.fuelsample.things;
 
 import android.app.Application;
 
