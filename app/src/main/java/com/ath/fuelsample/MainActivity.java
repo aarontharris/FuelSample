@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 		// this is not an issue due to lazy instantiation.
 		mAppCyc.get().doStuff();
 		mActCyc.get().doStuff();
-		mObjCyc.get().doStuff();
+		mObjCyc.get().doStuff(); // each cycle results in a new instance because these are not singletons
 	}
 
 }

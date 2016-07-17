@@ -15,7 +15,7 @@ import com.ath.fuel.OnFueled;
 import com.ath.fuelsample.things.SampleActivitySingleton;
 
 public class SampleFragment extends Fragment implements OnFueled {
-//	private final Lazy<SampleActivitySingleton> mSampleActivitySingleton = Lazy.attain( this, SampleActivitySingleton.class );
+	private final Lazy<SampleActivitySingleton> mSampleActivitySingleton = Lazy.attain( this, SampleActivitySingleton.class );
 
 	private TextView mLayout;
 
@@ -30,11 +30,11 @@ public class SampleFragment extends Fragment implements OnFueled {
 	@Nullable public View onCreateView( LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState ) {
 		mLayout = new TextView( getContext() );
 		mLayout.setText( "Hello Fragment" );
-//		Log.d( "onCreateView - %s", mSampleActivitySingleton.get().getHelloWorld() );
+		Log.d( "onCreateView - %s", mSampleActivitySingleton.get().getHelloWorld() );
 		return mLayout;
 	}
 
 	@Override public void onFueled() {
-		Log.d("onFueled");
+		Log.d( "onFueled" );
 	}
 }
