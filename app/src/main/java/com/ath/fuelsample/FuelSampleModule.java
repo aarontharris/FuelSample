@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.ath.fuel.FuelModule;
 import com.ath.fuel.Lazy;
+import com.ath.fuel.err.FuelInjectionException;
 import com.ath.fuelsample.things.Box;
 import com.ath.fuelsample.things.BoxColored;
 import com.ath.fuelsample.things.LittleBlackBox;
@@ -19,6 +20,10 @@ public class FuelSampleModule extends FuelModule {
 
 	public FuelSampleModule( Application app ) {
 		super( app );
+	}
+
+	@Override protected void onFailure( Lazy lazy, FuelInjectionException exception ) {
+		Log.e( exception, "Fuel Failure while obtaining %s", lazy );
 	}
 
 	@Override protected void configure() {
@@ -46,11 +51,15 @@ public class FuelSampleModule extends FuelModule {
 	public static class BoxProvider extends FuelProviderSimple<BoxColored> {
 		public static final int BOX_FLAVOR_BLACK = 1;
 		public static final int BOX_FLAVOR_BLUE = 2;
-		private final Lazy<SillyBoxStateManager> mBoxState = Lazy.attain( this, SillyBoxStateManager.class );
 
 		// We're choosing to offer a black box if thats how the state dictates
 		// otherwise we're defaulting to blue.
 		@Override public BoxColored provide( Lazy lazy, Object parent ) {
+
+			// best practice with providers is to inject with the context the lazy was given
+			// that way you are gauranteed to not brake the scope.
+			// if an application injected this Box, we wouldn't want to try to use an Activity context
+			Lazy<SillyBoxStateManager> mBoxState = Lazy.attain( lazy.getContext(), SillyBoxStateManager.class );
 			BoxColored box = null;
 
 			// Optional consideration of flavor

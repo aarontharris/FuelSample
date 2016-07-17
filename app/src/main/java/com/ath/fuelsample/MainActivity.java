@@ -9,6 +9,7 @@ import com.ath.fuel.Lazy;
 import com.ath.fuelsample.things.Box;
 import com.ath.fuelsample.things.BoxColored;
 import com.ath.fuelsample.FuelSampleModule.BoxProvider;
+import com.ath.fuelsample.things.CyclicalSingleton1;
 import com.ath.fuelsample.things.SampleActivitySingleton;
 import com.ath.fuelsample.things.SampleAppSingleton;
 import com.ath.fuelsample.things.SampleExternalPojo;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private final Lazy<Box> mBox = Lazy.attain( this, Box.class );
     private final Lazy<BoxColored> mBoxColored = Lazy.attain( this, BoxColored.class );
     private final Lazy<Box> mAnotherBox = Lazy.attain( this, Box.class );
+    private final Lazy<CyclicalSingleton1> mCyc = Lazy.attain( this, CyclicalSingleton1.class );
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -83,5 +85,6 @@ public class MainActivity extends AppCompatActivity {
         Log.d( "Box6: %s - expects a LittleBlackBox", blackFlavoredBox.get() );
         Log.d( "Box7: %s - expects a LittleBlueBox", blueFlavoredBox.get() );
 
+        mCyc.get().doStuff();
     }
 }

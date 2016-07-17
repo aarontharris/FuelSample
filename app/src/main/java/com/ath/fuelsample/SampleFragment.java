@@ -11,9 +11,10 @@ import android.widget.TextView;
 
 import com.ath.fuel.FuelInjector;
 import com.ath.fuel.Lazy;
+import com.ath.fuel.OnFueled;
 import com.ath.fuelsample.things.SampleActivitySingleton;
 
-public class SampleFragment extends Fragment {
+public class SampleFragment extends Fragment implements OnFueled {
 	private final Lazy<SampleActivitySingleton> mSampleActivitySingleton = Lazy.attain( this, SampleActivitySingleton.class );
 
 	private TextView mLayout;
@@ -33,4 +34,7 @@ public class SampleFragment extends Fragment {
 		return mLayout;
 	}
 
+	@Override public void onFueled() {
+		Log.d("onFueled");
+	}
 }

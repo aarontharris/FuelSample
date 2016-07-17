@@ -28,5 +28,4 @@ public class SampleExternalPojo {
 	public String doStuff() {
 		return String.format( "Hello World I am %s", this );
 	}
-
 }
