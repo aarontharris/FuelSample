@@ -8,10 +8,10 @@ import android.os.Bundle;
 import com.ath.fuel.FuelModule;
 import com.ath.fuel.Lazy;
 import com.ath.fuel.err.FuelInjectionException;
-import com.ath.fuelsample.things.Box;
-import com.ath.fuelsample.things.BoxColored;
-import com.ath.fuelsample.things.LittleBlackBox;
-import com.ath.fuelsample.things.LittleBlueBox;
+import com.ath.fuelsample.data.Box;
+import com.ath.fuelsample.data.BoxColored;
+import com.ath.fuelsample.data.LittleBlackBox;
+import com.ath.fuelsample.data.LittleBlueBox;
 import com.ath.fuelsample.things.SampleExternalPojo;
 import com.ath.fuelsample.things.SillyBoxStateManager;
 

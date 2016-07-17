@@ -10,6 +10,6 @@ public class SampleAppSingleton {
     private final Lazy<Application> mApp = Lazy.attain( this, Application.class );
 
     public String getHelloWorld() {
-        return String.format( "Hello World I live in %s and I am %s", mApp, this );
+        return String.format( "Hello World I live in %s and I am %s", mApp.get(), this );
     }
 }

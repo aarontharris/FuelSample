@@ -1,4 +1,4 @@
-package com.ath.fuelsample.things;
+package com.ath.fuelsample.data;
 
 public interface BoxColored extends Box {
 

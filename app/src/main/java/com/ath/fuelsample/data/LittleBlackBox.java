@@ -1,4 +1,4 @@
-package com.ath.fuelsample.things;
+package com.ath.fuelsample.data;
 
 import android.graphics.Color;
 
