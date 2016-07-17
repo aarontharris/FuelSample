@@ -89,6 +89,10 @@ public class MainActivity extends AppCompatActivity {
 		Log.d( "Box6: %s - expects a LittleBlackBox", blackFlavoredBox.get() );
 		Log.d( "Box7: %s - expects a LittleBlueBox", blueFlavoredBox.get() );
 
+		// Demonstrate that cyclical dependencies are not an issue.
+		// Each of these injectables cause a cyclical injection
+		// A -> B -> A
+		// this is not an issue due to lazy instantiation.
 		mAppCyc.get().doStuff();
 		mActCyc.get().doStuff();
 		mObjCyc.get().doStuff();
