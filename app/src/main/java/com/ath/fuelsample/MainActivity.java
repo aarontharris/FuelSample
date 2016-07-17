@@ -9,6 +9,9 @@ import com.ath.fuel.Lazy;
 import com.ath.fuelsample.FuelSampleModule.BoxProvider;
 import com.ath.fuelsample.data.Box;
 import com.ath.fuelsample.data.BoxColored;
+import com.ath.fuelsample.things.CyclicalActivitySingleton1;
+import com.ath.fuelsample.things.CyclicalAppSingleton1;
+import com.ath.fuelsample.things.CyclicalObject1;
 import com.ath.fuelsample.things.SampleActivitySingleton;
 import com.ath.fuelsample.things.SampleAppSingleton;
 import com.ath.fuelsample.things.SampleExternalPojo;
@@ -37,7 +40,9 @@ public class MainActivity extends AppCompatActivity {
 	private final Lazy<Box> mBox = Lazy.attain( this, Box.class );
 	private final Lazy<BoxColored> mBoxColored = Lazy.attain( this, BoxColored.class );
 	private final Lazy<Box> mAnotherBox = Lazy.attain( this, Box.class );
-	//private final Lazy<CyclicalSingleton1> mCyc = Lazy.attain( this, CyclicalSingleton1.class );
+	private final Lazy<CyclicalAppSingleton1> mAppCyc = Lazy.attain( this, CyclicalAppSingleton1.class );
+	private final Lazy<CyclicalActivitySingleton1> mActCyc = Lazy.attain( this, CyclicalActivitySingleton1.class );
+	private final Lazy<CyclicalObject1> mObjCyc = Lazy.attain( this, CyclicalObject1.class );
 
 	@Override
 	protected void onCreate( Bundle savedInstanceState ) {
@@ -84,7 +89,9 @@ public class MainActivity extends AppCompatActivity {
 		Log.d( "Box6: %s - expects a LittleBlackBox", blackFlavoredBox.get() );
 		Log.d( "Box7: %s - expects a LittleBlueBox", blueFlavoredBox.get() );
 
-		//mCyc.get().doStuff();
+		mAppCyc.get().doStuff();
+		mActCyc.get().doStuff();
+		mObjCyc.get().doStuff();
 	}
 
 }
