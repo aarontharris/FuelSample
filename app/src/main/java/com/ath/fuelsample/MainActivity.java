@@ -44,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
 	private final Lazy<CyclicalActivitySingleton1> mActCyc = Lazy.attain( this, CyclicalActivitySingleton1.class );
 	private final Lazy<CyclicalObject1> mObjCyc = Lazy.attain( this, CyclicalObject1.class );
 
+	// TODO: README: this should fail. For more details see Scope.canAccess( Scope )
+	// private final Lazy<SampleFragSingleton> mFragSingleton = Lazy.attain( this, SampleFragSingleton.class );
+
 	@Override
 	protected void onCreate( Bundle savedInstanceState ) {
 		super.onCreate( savedInstanceState );
