@@ -1,9 +1,7 @@
 package com.ath.fuelsample.things;
 
 import android.app.Activity;
-import android.app.Application;
 
-import com.ath.fuel.Lazy;
 import com.ath.fuelsample.Log;
 
 // Pretend as though this class is external blackbox code.
@@ -28,4 +26,5 @@ public class SampleExternalPojo {
 	public String doStuff() {
 		return String.format( "Hello World I am %s", this );
 	}
+
 }

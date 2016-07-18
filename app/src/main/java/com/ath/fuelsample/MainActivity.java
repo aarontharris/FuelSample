@@ -15,6 +15,7 @@ import com.ath.fuelsample.things.CyclicalObject1;
 import com.ath.fuelsample.things.SampleActivitySingleton;
 import com.ath.fuelsample.things.SampleAppSingleton;
 import com.ath.fuelsample.things.SampleExternalPojo;
+import com.ath.fuelsample.things.SamplePojoWithActivityScope;
 import com.ath.fuelsample.things.SillyBoxStateManager;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 	private final Lazy<CyclicalAppSingleton1> mAppCyc = Lazy.attain( this, CyclicalAppSingleton1.class );
 	private final Lazy<CyclicalActivitySingleton1> mActCyc = Lazy.attain( this, CyclicalActivitySingleton1.class );
 	private final Lazy<CyclicalObject1> mObjCyc = Lazy.attain( this, CyclicalObject1.class );
+	private final Lazy<SamplePojoWithActivityScope> mPojoWithActivity = Lazy.attain( this, SamplePojoWithActivityScope.class );
 
 	// TODO: README: this should fail. For more details see Scope.canAccess( Scope )
 	// private final Lazy<SampleFragSingleton> mFragSingleton = Lazy.attain( this, SampleFragSingleton.class );
@@ -99,6 +101,27 @@ public class MainActivity extends AppCompatActivity {
 		mAppCyc.get().doStuff();
 		mActCyc.get().doStuff();
 		mObjCyc.get().doStuff(); // each cycle results in a new instance because these are not singletons
+
+		mPojoWithActivity.get().doStuff();
 	}
 
+	@Override protected void onResume() {
+		super.onResume();
+//
+//		new AsyncTask<Void, Void, Void>() {
+//			@Override protected Void doInBackground( Void... voids ) {
+//				FuelInjector.ignite( MainActivity.this, this );
+//				Log.d( "doInBackground" );
+//				Lazy<SampleAsyncSingleton> aSingleton = Lazy.attain( this, SampleAsyncSingleton.class );
+//				aSingleton.get().doStuff();
+//				return null;
+//			}
+//
+//			@Override protected void onPostExecute( Void aVoid ) {
+//				Log.d( "onPostExecute" );
+//				Lazy<SampleAsyncSingleton> aSingleton = Lazy.attain( this, SampleAsyncSingleton.class );
+//				aSingleton.get().doStuff();
+//			}
+//		}.executeOnExecutor( AsyncTask.THREAD_POOL_EXECUTOR );
+	}
 }
