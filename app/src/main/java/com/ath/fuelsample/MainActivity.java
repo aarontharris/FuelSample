@@ -1,6 +1,7 @@
 package com.ath.fuelsample;
 
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -14,6 +15,7 @@ import com.ath.fuelsample.things.CyclicalAppSingleton1;
 import com.ath.fuelsample.things.CyclicalObject1;
 import com.ath.fuelsample.things.SampleActivitySingleton;
 import com.ath.fuelsample.things.SampleAppSingleton;
+import com.ath.fuelsample.things.SampleAsyncSingleton;
 import com.ath.fuelsample.things.SampleExternalPojo;
 import com.ath.fuelsample.things.SamplePojoWithActivityScope;
 import com.ath.fuelsample.things.SillyBoxStateManager;
@@ -107,21 +109,21 @@ public class MainActivity extends AppCompatActivity {
 
 	@Override protected void onResume() {
 		super.onResume();
-//
-//		new AsyncTask<Void, Void, Void>() {
-//			@Override protected Void doInBackground( Void... voids ) {
-//				FuelInjector.ignite( MainActivity.this, this );
-//				Log.d( "doInBackground" );
-//				Lazy<SampleAsyncSingleton> aSingleton = Lazy.attain( this, SampleAsyncSingleton.class );
-//				aSingleton.get().doStuff();
-//				return null;
-//			}
-//
-//			@Override protected void onPostExecute( Void aVoid ) {
-//				Log.d( "onPostExecute" );
-//				Lazy<SampleAsyncSingleton> aSingleton = Lazy.attain( this, SampleAsyncSingleton.class );
-//				aSingleton.get().doStuff();
-//			}
-//		}.executeOnExecutor( AsyncTask.THREAD_POOL_EXECUTOR );
+
+		new AsyncTask<Void, Void, Void>() {
+			@Override protected Void doInBackground( Void... voids ) {
+				FuelInjector.ignite( MainActivity.this, this );
+				Log.d( "doInBackground" );
+				Lazy<SampleAsyncSingleton> aSingleton = Lazy.attain( this, SampleAsyncSingleton.class );
+				aSingleton.get().doStuff();
+				return null;
+			}
+
+			@Override protected void onPostExecute( Void aVoid ) {
+				Log.d( "onPostExecute" );
+				Lazy<SampleAsyncSingleton> aSingleton = Lazy.attain( this, SampleAsyncSingleton.class );
+				aSingleton.get().doStuff();
+			}
+		}.executeOnExecutor( AsyncTask.THREAD_POOL_EXECUTOR );
 	}
 }
