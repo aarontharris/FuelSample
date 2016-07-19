@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
 		mPojoWithActivity.get().doStuff();
 
-		int iterations = 100000;
+		int iterations = 100;
 		timeTest1( iterations ); // Singletons
 		timeTest2( iterations ); // Pojos
 		timeTest3( iterations ); // Mixed test 1/2 Pojos and 1/2 Singletons
