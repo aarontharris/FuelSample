@@ -27,7 +27,7 @@ public class FuelSampleModule extends FuelModule {
 	}
 
 	@Override protected void configure() {
-		super.configure();
+		// super.configure(); // Call through to super for default bindings of services etc -- or not
 
 		// The simplest binding, a type to an object
 		// effectively turning that object into an injectable app singleton

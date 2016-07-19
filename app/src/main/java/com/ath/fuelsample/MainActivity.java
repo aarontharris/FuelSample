@@ -3,6 +3,7 @@ package com.ath.fuelsample;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 
 import com.ath.fuel.FuelInjector;
@@ -19,6 +20,7 @@ import com.ath.fuelsample.things.SampleAsyncSingleton;
 import com.ath.fuelsample.things.SampleExternalPojo;
 import com.ath.fuelsample.things.SamplePojoWithActivityScope;
 import com.ath.fuelsample.things.SillyBoxStateManager;
+import com.ath.fuelsample.things.SimpleAppSingleton;
 
 public class MainActivity extends AppCompatActivity {
 	// MainActivity is the parent
@@ -105,6 +107,46 @@ public class MainActivity extends AppCompatActivity {
 		mObjCyc.get().doStuff(); // each cycle results in a new instance because these are not singletons
 
 		mPojoWithActivity.get().doStuff();
+
+		int iterations = 100000;
+		timeTest1( iterations ); // Singletons
+		timeTest2( iterations ); // Pojos
+		timeTest3( iterations ); // Mixed test 1/2 Pojos and 1/2 Singletons
+	}
+
+	private void timeTest1( int iterations ) {
+		long timeStart = SystemClock.elapsedRealtime();
+		for ( int i = 0; i < iterations; i++ ) {
+			Lazy<SimpleAppSingleton> injected = Lazy.attain( this, SimpleAppSingleton.class );
+			injected.get();
+		}
+		long timeStop = SystemClock.elapsedRealtime();
+		Log.d( "Fuel Timed Test1:  %sms, %sx Singletons", timeStop - timeStart, iterations );
+	}
+
+	private void timeTest2( int iterations ) {
+		long timeStart = SystemClock.elapsedRealtime();
+		for ( int i = 0; i < iterations; i++ ) {
+			Lazy<SampleExternalPojo> injected = Lazy.attain( this, SampleExternalPojo.class );
+			injected.get();
+		}
+		long timeStop = SystemClock.elapsedRealtime();
+		Log.d( "Fuel Timed Test2:  %sms, %sx Pojos", timeStop - timeStart, iterations );
+	}
+
+	// A mixed test.  1/2 of the iterations are Pojos and 1/2 are Singletons
+	private void timeTest3( int iterations ) {
+		long timeStart = SystemClock.elapsedRealtime();
+		for ( int i = 0; i < iterations / 2; i++ ) {
+			Lazy<SimpleAppSingleton> injected = Lazy.attain( this, SimpleAppSingleton.class );
+			injected.get();
+		}
+		for ( int i = 0; i < iterations / 2; i++ ) {
+			Lazy<SampleExternalPojo> injected = Lazy.attain( this, SampleExternalPojo.class );
+			injected.get();
+		}
+		long timeStop = SystemClock.elapsedRealtime();
+		Log.d( "Fuel Timed Test3:  %sms, %sx Singletons and Pojos", timeStop - timeStart, iterations );
 	}
 
 	@Override protected void onResume() {
