@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.View.OnClickListener;
 
 import com.ath.fuel.FuelInjector;
 import com.ath.fuel.Lazy;
@@ -58,6 +60,13 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate( savedInstanceState );
 		setContentView( R.layout.activity_main );
 		FuelInjector.ignite( this, this );
+
+		View helloWorldText = findViewById( R.id.helloworld_text );
+		helloWorldText.setOnClickListener( new OnClickListener() {
+			@Override public void onClick( View view ) {
+				MainActivity.this.startActivity( SecondActivity.newIntent( MainActivity.this ) );
+			}
+		} );
 
 		Log.d( mAppSingleton.get().getHelloWorld() );
 		Log.d( mActivitySingleton.get().getHelloWorld() );

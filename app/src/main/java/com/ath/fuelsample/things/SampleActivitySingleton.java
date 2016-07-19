@@ -15,7 +15,7 @@ public class SampleActivitySingleton implements OnFueled {
 	private final Lazy<SampleAppSingleton> mSampleAppSingleton = Lazy.attain( this, SampleAppSingleton.class ).setDebug();
 
 	public String getHelloWorld() {
-		return String.format( "Hello World I live in (%s, %s) and I am %s", mApp, mActivity, this );
+		return String.format( "Hello World ! I live in (%s, %s) and I am %s", mApp.get(), mActivity.get(), this );
 	}
 
 	@Override public void onFueled() {
