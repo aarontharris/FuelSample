@@ -16,6 +16,7 @@ import com.ath.fuelsample.data.BoxColored;
 import com.ath.fuelsample.things.CyclicalActivitySingleton1;
 import com.ath.fuelsample.things.CyclicalAppSingleton1;
 import com.ath.fuelsample.things.CyclicalObject1;
+import com.ath.fuelsample.things.MyClass;
 import com.ath.fuelsample.things.SampleActivitySingleton;
 import com.ath.fuelsample.things.SampleAppSingleton;
 import com.ath.fuelsample.things.SampleAsyncSingleton;
@@ -51,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
 	private final Lazy<CyclicalActivitySingleton1> mActCyc = Lazy.attain( this, CyclicalActivitySingleton1.class );
 	private final Lazy<CyclicalObject1> mObjCyc = Lazy.attain( this, CyclicalObject1.class );
 	private final Lazy<SamplePojoWithActivityScope> mPojoWithActivity = Lazy.attain( this, SamplePojoWithActivityScope.class );
+	private final Lazy<MyClass> mMyClass1 = Lazy.attain( this, MyClass.class );
+	private final Lazy<MyClass> mMyClass2 = Lazy.attain( this, MyClass.class );
 
 	// TODO: README: this should fail. For more details see Scope.canAccess( Scope )
 	// private final Lazy<SampleFragSingleton> mFragSingleton = Lazy.attain( this, SampleFragSingleton.class );
@@ -76,16 +79,18 @@ public class MainActivity extends AppCompatActivity {
 		// Box1 and Box3 will be different instances but of equal value because the provider is called for each unique lazy.
 		// For all three the instance should be a LittleBlackBox since thats how we have our Provider setup
 		Log.d( "Box1: %s - expects a LittleBlackBox", mBox.get() );
-		Log.d( "Box2: %s - expects a LittleBlackBox", mBox.get() );
-		Log.d( "Box3: %s - expects a LittleBlackBox", mBoxColored.get() );
+		Log.d( "Box2: %s - expects a LittleBlackBox same instance as Box1", mBox.get() );
+		Log.d( "Box3: %s - expects a LittleBlackBox equal to Box1 but different instance", mBoxColored.get() );
 
 		// Now we'll mix things up and alter the app state in a way that we have our
 		// Box provider wired to pick up and deal with.
 		// After changing this state, when we try to get an already .get()'d lazy
 		// such as Box1,2 or 3, we'll get the same value we got before because they're cached.
 		// However now if we try to .get() a new Lazy<Box> we'll get one that observes the latest state
+		// Not exactly good code, but it suits our demonstration needs.
 		mBoxState.get().setColor( Color.BLUE );
 		Log.d( "Box4: %s - expects a LittleBlueBox", mAnotherBox.get() );
+		mBoxState.get().setColor( Color.BLACK ); // put the manager back
 
 		// We can even adhoc obtain a Lazy<Box>
 		// Just MAKE SURE that the parent "this" is
@@ -116,6 +121,9 @@ public class MainActivity extends AppCompatActivity {
 		mObjCyc.get().doStuff(); // each cycle results in a new instance because these are not singletons
 
 		mPojoWithActivity.get().doStuff();
+
+		Log.d( "MyClass1: %s", mMyClass1.get() );
+		Log.d( "MyClass2: %s", mMyClass2.get() );
 
 		int iterations = 100;
 		timeTest1( iterations ); // Singletons

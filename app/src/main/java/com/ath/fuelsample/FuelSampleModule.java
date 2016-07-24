@@ -46,9 +46,10 @@ public class FuelSampleModule extends FuelModule {
 		// however we can just as easily return the same instance if we wanted singleton
 		bind( Box.class, BoxColored.class );
 		bind( BoxColored.class, new BoxProvider() );
+
 	}
 
-	public static class BoxProvider extends FuelProviderSimple<BoxColored> {
+	public static class BoxProvider extends FuelProvider<BoxColored> {
 		public static final int BOX_FLAVOR_BLACK = 1;
 		public static final int BOX_FLAVOR_BLUE = 2;
 
@@ -59,7 +60,7 @@ public class FuelSampleModule extends FuelModule {
 			// best practice with providers is to inject with the context the lazy was given
 			// that way you are gauranteed to not brake the scope.
 			// if an application injected this Box, we wouldn't want to try to use an Activity context
-			Lazy<SillyBoxStateManager> mBoxState = Lazy.attain( lazy.getContext(), SillyBoxStateManager.class );
+			Lazy<SillyBoxStateManager> boxState = Lazy.attain( lazy.getContext(), SillyBoxStateManager.class );
 			BoxColored box = null;
 
 			// Optional consideration of flavor
@@ -71,7 +72,7 @@ public class FuelSampleModule extends FuelModule {
 				box = attainBlackBox();
 			} else if ( BOX_FLAVOR_BLUE == flavor ) {
 				box = attainBlueBox();
-			} else if ( Color.BLACK == mBoxState.get().getColor() ) {
+			} else if ( Color.BLACK == boxState.get().getColor() ) {
 				box = attainBlackBox();
 			} else {
 				box = attainBlueBox();
