@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.ath.fuel.FuelInjector;
-import com.ath.fuel.Lazy;
-import com.ath.fuelsample.things.SampleActivitySingleton;
 
 public class SecondActivity extends AppCompatActivity {
 
@@ -16,7 +14,7 @@ public class SecondActivity extends AppCompatActivity {
 		return intent;
 	}
 
-	private final Lazy<SampleActivitySingleton> mActivitySingleton = Lazy.attain( this, SampleActivitySingleton.class );
+	//private final Lazy<SampleActivitySingleton> mActivitySingleton = Lazy.attain( this, SampleActivitySingleton.class );
 
 	@Override
 	protected void onCreate( Bundle savedInstanceState ) {
@@ -25,6 +23,6 @@ public class SecondActivity extends AppCompatActivity {
 		FuelInjector.ignite( this, this );
 
 		Log.d("SecondActivity.onCreate");
-		Log.d( mActivitySingleton.get().getHelloWorld() );
+		//Log.d( mActivitySingleton.get().getHelloWorld() );
 	}
 }

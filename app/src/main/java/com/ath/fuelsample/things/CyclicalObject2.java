@@ -18,6 +18,7 @@ public class CyclicalObject2 {
 	// Cyc2.doStuff() called Cyc1.doStuff()
 	// this is obviously a infinite loop and no fault of Fuel's
 	private final Lazy<CyclicalObject1> mCyclicalObject = Lazy.attain( this, CyclicalObject1.class );
+	private final Lazy<MemoryEater> mMemoryEater = Lazy.attain( this, MemoryEater.class );
 
 	public CyclicalObject2() {
 		// Assumes it will be injected so FuelInject.ignite is not necessary
@@ -31,6 +32,7 @@ public class CyclicalObject2 {
 	public void doStuff() {
 		Log.d( "doStuff 2 %s", this );
 		mCyclicalObject.get().doCycleTermination();
+		mMemoryEater.get();
 	}
 
 }
