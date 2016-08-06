@@ -25,4 +25,8 @@ public class SecondActivity extends AppCompatActivity {
 		Log.d("SecondActivity.onCreate");
 		//Log.d( mActivitySingleton.get().getHelloWorld() );
 	}
+
+	@Override protected void onResume() {
+		super.onResume();
+	}
 }

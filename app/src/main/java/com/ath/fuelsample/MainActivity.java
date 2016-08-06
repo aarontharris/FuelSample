@@ -71,6 +71,13 @@ public class MainActivity extends AppCompatActivity {
 			}
 		} );
 
+		View dumpText = findViewById( R.id.dump_text );
+		dumpText.setOnClickListener( new OnClickListener() {
+			@Override public void onClick( View view ) {
+				FuelInjector.debugInjectionGraph();
+			}
+		} );
+
 		Log.d( mAppSingleton.get().getHelloWorld() );
 		Log.d( mActivitySingleton.get().getHelloWorld() );
 		Log.d( mPojo.get().doStuff() );
@@ -125,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
 		Log.d( "MyClass1: %s", mMyClass1.get() );
 		Log.d( "MyClass2: %s", mMyClass2.get() );
 
-		int iterations = 100;
+		int iterations = 20000;
 		timeTest1( iterations ); // Singletons
 		timeTest2( iterations ); // Pojos
 		timeTest3( iterations ); // Mixed test 1/2 Pojos and 1/2 Singletons
