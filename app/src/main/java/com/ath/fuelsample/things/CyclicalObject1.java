@@ -8,6 +8,7 @@ import com.ath.fuelsample.Log;
  */
 public class CyclicalObject1 {
 	private final Lazy<CyclicalObject2> mCyclicalObject = Lazy.attain( this, CyclicalObject2.class );
+	private final Lazy<MemoryEater> mMemoryEater = Lazy.attain( this, MemoryEater.class );
 
 	public CyclicalObject1() {
 		// Assumes it will be injected so FuelInject.ignite is not necessary
@@ -21,6 +22,7 @@ public class CyclicalObject1 {
 	public void doStuff() {
 		Log.d("doStuff 1 %s", this );
 		mCyclicalObject.get().doStuff();
+		mMemoryEater.get();
 	}
 
 	public void doCycleTermination() {

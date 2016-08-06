@@ -71,6 +71,13 @@ public class MainActivity extends AppCompatActivity {
 			}
 		} );
 
+		View dumpText = findViewById( R.id.dump_text );
+		dumpText.setOnClickListener( new OnClickListener() {
+			@Override public void onClick( View view ) {
+				FuelInjector.debugInjectionGraph();
+			}
+		} );
+
 		Log.d( mAppSingleton.get().getHelloWorld() );
 		Log.d( mActivitySingleton.get().getHelloWorld() );
 		Log.d( mPojo.get().doStuff() );

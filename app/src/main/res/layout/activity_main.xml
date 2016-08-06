@@ -17,6 +17,15 @@
         android:padding="15dp"
         android:text="Hello World!" />
 
+
+    <TextView
+        android:id="@+id/dump_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="Click to Log Injection Graph" />
+
+
     <fragment
         android:id="@+id/fragment1"
         android:name="com.ath.fuelsample.SampleFragment"

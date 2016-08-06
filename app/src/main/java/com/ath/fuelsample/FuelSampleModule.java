@@ -12,6 +12,7 @@ import com.ath.fuelsample.data.Box;
 import com.ath.fuelsample.data.BoxColored;
 import com.ath.fuelsample.data.LittleBlackBox;
 import com.ath.fuelsample.data.LittleBlueBox;
+import com.ath.fuelsample.things.MemoryEater;
 import com.ath.fuelsample.things.SampleExternalPojo;
 import com.ath.fuelsample.things.SillyBoxStateManager;
 
@@ -47,6 +48,19 @@ public class FuelSampleModule extends FuelModule {
 		bind( Box.class, BoxColored.class );
 		bind( BoxColored.class, new BoxProvider() );
 
+		bind( MemoryEater.class, new MemoryEaterProvider() );
+	}
+
+	// Provide a memory eater to deliberately consume memory to help identify leaks if any.
+	public static class MemoryEaterProvider extends FuelProvider<MemoryEater> {
+		private static final int DEFAULT_SIZE = 1024 * 1024; // 1mb
+
+		@Override public MemoryEater provide( Lazy lazy, Object parent ) {
+			MemoryEater memoryEater = new MemoryEater();
+			int bytes = lazy.getFlavor() != null ? lazy.getFlavor() : DEFAULT_SIZE;
+			memoryEater.eat( bytes );
+			return memoryEater;
+		}
 	}
 
 	public static class BoxProvider extends FuelProvider<BoxColored> {
