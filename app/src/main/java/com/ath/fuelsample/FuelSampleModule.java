@@ -12,6 +12,7 @@ import com.ath.fuelsample.data.Box;
 import com.ath.fuelsample.data.BoxColored;
 import com.ath.fuelsample.data.LittleBlackBox;
 import com.ath.fuelsample.data.LittleBlueBox;
+import com.ath.fuelsample.things.MemoryEater;
 import com.ath.fuelsample.things.SampleExternalPojo;
 import com.ath.fuelsample.things.SillyBoxStateManager;
 
@@ -46,9 +47,23 @@ public class FuelSampleModule extends FuelModule {
 		// however we can just as easily return the same instance if we wanted singleton
 		bind( Box.class, BoxColored.class );
 		bind( BoxColored.class, new BoxProvider() );
+
+		bind( MemoryEater.class, new MemoryEaterProvider() );
 	}
 
-	public static class BoxProvider extends FuelProviderSimple<BoxColored> {
+	// Provide a memory eater to deliberately consume memory to help identify leaks if any.
+	public static class MemoryEaterProvider extends FuelProvider<MemoryEater> {
+		private static final int DEFAULT_SIZE = 1024 * 1024; // 1mb
+
+		@Override public MemoryEater provide( Lazy lazy, Object parent ) {
+			MemoryEater memoryEater = new MemoryEater();
+			int bytes = lazy.getFlavor() != null ? lazy.getFlavor() : DEFAULT_SIZE;
+			memoryEater.eat( bytes );
+			return memoryEater;
+		}
+	}
+
+	public static class BoxProvider extends FuelProvider<BoxColored> {
 		public static final int BOX_FLAVOR_BLACK = 1;
 		public static final int BOX_FLAVOR_BLUE = 2;
 
@@ -59,7 +74,7 @@ public class FuelSampleModule extends FuelModule {
 			// best practice with providers is to inject with the context the lazy was given
 			// that way you are gauranteed to not brake the scope.
 			// if an application injected this Box, we wouldn't want to try to use an Activity context
-			Lazy<SillyBoxStateManager> mBoxState = Lazy.attain( lazy.getContext(), SillyBoxStateManager.class );
+			Lazy<SillyBoxStateManager> boxState = Lazy.attain( lazy.getContext(), SillyBoxStateManager.class );
 			BoxColored box = null;
 
 			// Optional consideration of flavor
@@ -71,7 +86,7 @@ public class FuelSampleModule extends FuelModule {
 				box = attainBlackBox();
 			} else if ( BOX_FLAVOR_BLUE == flavor ) {
 				box = attainBlueBox();
-			} else if ( Color.BLACK == mBoxState.get().getColor() ) {
+			} else if ( Color.BLACK == boxState.get().getColor() ) {
 				box = attainBlackBox();
 			} else {
 				box = attainBlueBox();
