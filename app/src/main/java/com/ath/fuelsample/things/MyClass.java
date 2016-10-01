@@ -6,12 +6,12 @@ import com.ath.fuelsample.Log;
 @AppSingleton
 public class MyClass {
 
-	public MyClass() {
-		Log.d( "MyClass Constructed" );
-	}
+    public MyClass() {
+        Log.d( "MyClass Constructed" );
+    }
 
-	public MyClass( SomeThing someThing ) {
-		Log.d( "MyClass Constructed with %s", someThing );
-	}
+    public MyClass( SomeThing someThing ) {
+        Log.d( "MyClass Constructed with %s", someThing );
+    }
 
 }

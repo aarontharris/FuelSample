@@ -10,14 +10,14 @@ import com.ath.fuel.AppSingleton;
  */
 @AppSingleton
 public class SillyBoxStateManager {
-	private int mColor = Color.BLACK;
+    private int mColor = Color.BLACK;
 
-	public void setColor( int color ) {
-		mColor = color;
-	}
+    public int getColor() {
+        return mColor;
+    }
 
-	public int getColor() {
-		return mColor;
-	}
+    public void setColor( int color ) {
+        mColor = color;
+    }
 
 }

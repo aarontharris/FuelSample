@@ -9,22 +9,22 @@ import com.ath.fuelsample.Log;
 // Note how there is no Annotation here
 public class SampleExternalPojo {
 
-	// Lets pretend this external class requires some lifecycle awareness
+    // Lets pretend this external class requires some lifecycle awareness
 
-	public void init( Activity activity ) {
-		Log.d( "SampleExternalPojo.init %s", activity );
-	}
+    public void init( Activity activity ) {
+        Log.d( "SampleExternalPojo.init %s", activity );
+    }
 
-	public void start( Activity activity ) {
-		Log.d( "SampleExternalPojo.start %s", activity );
-	}
+    public void start( Activity activity ) {
+        Log.d( "SampleExternalPojo.start %s", activity );
+    }
 
-	public void stop( Activity activity ) {
-		Log.d( "SampleExternalPojo.stop %s", activity );
-	}
+    public void stop( Activity activity ) {
+        Log.d( "SampleExternalPojo.stop %s", activity );
+    }
 
-	public String doStuff() {
-		return String.format( "Hello World I am %s", this );
-	}
+    public String doStuff() {
+        return String.format( "Hello World I am %s", this );
+    }
 
 }

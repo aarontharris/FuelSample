@@ -6,8 +6,8 @@ import com.ath.fuelsample.Log;
 @AppSingleton
 public class SimpleAppSingleton {
 
-	public void helloWorld() {
-		Log.d( "Hello World" );
-	}
+    public void helloWorld() {
+        Log.d( "Hello World" );
+    }
 
 }
