@@ -1,11 +1,10 @@
 package com.ath.fuelsample.things;
 
 import com.ath.fuel.Lazy;
+import com.ath.fuel.RequiresInjection;
 import com.ath.fuelsample.Log;
 
-/**
- * Inject me
- */
+@RequiresInjection
 public class CyclicalObject1 {
     private final Lazy<CyclicalObject2> mCyclicalObject = Lazy.attain( this, CyclicalObject2.class );
     private final Lazy<MemoryEater> mMemoryEater = Lazy.attain( this, MemoryEater.class );

@@ -1,8 +1,10 @@
 package com.ath.fuelsample.things;
 
 import com.ath.fuel.Lazy;
+import com.ath.fuel.RequiresInjection;
 import com.ath.fuelsample.Log;
 
+@RequiresInjection
 public class CyclicalObject2 {
 
     // Why doesn't this break?

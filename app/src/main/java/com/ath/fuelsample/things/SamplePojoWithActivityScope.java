@@ -3,8 +3,10 @@ package com.ath.fuelsample.things;
 import android.app.Activity;
 
 import com.ath.fuel.Lazy;
+import com.ath.fuel.RequiresInjection;
 import com.ath.fuelsample.Log;
 
+@RequiresInjection
 public class SamplePojoWithActivityScope {
     private final Lazy<SampleActivitySingleton> mSampleActivitySingleton = Lazy.attain( this, SampleActivitySingleton.class );
     private final Lazy<MemoryEater> mMemoryEater = Lazy.attain( this, MemoryEater.class );
