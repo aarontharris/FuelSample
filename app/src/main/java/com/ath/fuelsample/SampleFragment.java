@@ -40,6 +40,6 @@ public class SampleFragment extends Fragment implements OnFueled {
     }
 
     @Override public void onFueled() {
-        Log.d( "onFueled" );
+        Log.d( "onFueled %s", this );
     }
 }

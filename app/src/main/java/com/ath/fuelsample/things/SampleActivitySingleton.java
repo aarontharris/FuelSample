@@ -21,7 +21,7 @@ public class SampleActivitySingleton implements OnFueled {
     }
 
     @Override public void onFueled() {
-        Log.d( "onFueled w/ %s", mActivity.get() );
+        Log.d( "onFueled %s w/ %s", this, mActivity.get() );
         Log.d( mSampleAppSingleton.get().getHelloWorld() );
     }
 }
